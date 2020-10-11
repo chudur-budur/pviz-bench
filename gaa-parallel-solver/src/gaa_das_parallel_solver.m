@@ -15,7 +15,7 @@ function [] = gaa_das_parallel_solver(N)
     pool = parpool(N);
 
     % Load the reference directions
-    load('weights-layer-3112.mat', 'w');
+    load('../data/refs-das-dennis-3112.mat', 'w');
     % [number of reference directions, number of objectives]
     [wn, m] = size(w); 
     % number of constraints
@@ -70,6 +70,7 @@ function [] = gaa_das_parallel_solver(N)
     G = zeros(wn, 1);
     CV = zeros(wn, 1);
     F = zeros(wn, m);
+    X = zeros(wn, n);
     tic
     parfor i = 1:size(w,1)
         fprintf("Solving reference direction: %d\n", i);
@@ -97,20 +98,26 @@ function [] = gaa_das_parallel_solver(N)
         g = gaa_constfunc(xval);
         [~, cv] = gaa_cv(xval);
         % Save them into the arrays
+        X(i,:) = xval;
         F(i,:) = f;
         G(i,:) = g;
         CV(i,:) = sum(cv);
     end
     toc
 
-    save('gaa-das-10d.mat', 'F');
-    save('gaa-das-10d-g.mat', 'G');
-    save('gaa-das-10d-cv.mat', 'CV');
+    save('../data/gaa-das-10d-x.mat', 'X');
+    save('../data/gaa-das-10d-f.mat', 'F');
+    save('../data/gaa-das-10d-g.mat', 'G');
+    save('../data/gaa-das-10d-cv.mat', 'CV');
 
-    dlmwrite('gaa-das-10d.out', F, ...
-        'delimiter', '\t', 'precision', '%e', 'newline', 'unix');
-    dlmwrite('gaa-das-10d-cv.out', CV, ...
-        'delimiter', '\t', 'precision', '%e', 'newline', 'unix');
+    dlmwrite('../data/gaa-das-10d-x.csv', X, ...
+        'delimiter', ';', 'precision', '%e', 'newline', 'unix');
+    dlmwrite('../data/gaa-das-10d-f.csv', F, ...
+        'delimiter', ';', 'precision', '%e', 'newline', 'unix');
+    dlmwrite('../data/gaa-das-10d-g.csv', G, ...
+        'delimiter', ';', 'precision', '%e', 'newline', 'unix');
+    dlmwrite('../data/gaa-das-10d-cv.csv', CV, ...
+        'delimiter', ';', 'precision', '%e', 'newline', 'unix');
 
     delete(gcp);
     exit
