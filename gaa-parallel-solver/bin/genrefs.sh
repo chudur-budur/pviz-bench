@@ -1,13 +1,14 @@
 #!/bin/bash
 
-if [ -d "data" ]; then
-    rm -rf "data";
-    mkdir "data";
+$ROOT=$HOME/data/research/pviz-bench/gaa-parallel-solver
+if [ -d "$ROOT/data" ]; then
+    rm -rf "$ROOT/data";
+    mkdir "$ROOT/data";
 else
-    mkdir "data";
+    mkdir "$ROOT/data";
 fi
 
-cd src
+cd $ROOT/src
 
 echo "Generating 3112 reference directions suing Das-Dennis"
 matlab -nodisplay -nodesktop -nosplash -r "gen_das_dennis"
