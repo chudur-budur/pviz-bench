@@ -5,8 +5,8 @@
 #SBATCH --mem=4gb
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=20
-#SBATCH --output=gaa-lhs-parallel-solver.sb.o%j
-#SBATCH --error=gaa-lhs-parallel-solver.sb.e%j
+#SBATCH --output=gaa-lhs-solver.sb.o%j
+#SBATCH --error=gaa-lhs-solver.sb.e%j
 ## NOTE: If you get a message saying you exceeded the memory limit, add more memory!
 ## NOTE: in sbatch script, only one node one ppn is requestes. cores to run
 ## Workers are requested by MATLAB MDCE as a seperate job.
