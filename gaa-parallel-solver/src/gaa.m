@@ -5,7 +5,7 @@ function f = gaa(x, w)
         [~, f, ~, ~] = gaa_true(x, 10);
     % If there are weights then evaluate the weighted sum single obj func.
     else
-		[~, f, ~, ~] = gaa_true(x, 10);
+		[~, f_, ~, ~] = gaa_true(x, 10);
         % nadir = [80.0, 2250.0, 100.0, 3.0, 500.0, 45000, -1000, -10.0, -150.0, 3.0];
         % ideal = [70.0, 1500.0, 50.0, 1.0, 300.0, 40000, -3000, -20.0, -200.0, 0.0];
         % This is better ideal and nadir points.
