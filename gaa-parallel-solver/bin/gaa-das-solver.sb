@@ -15,6 +15,7 @@
 ##SBATCH --account=gres:MATLAB
 
 ## load modules
+module purge
 module load MATLAB/2020b
 
 ## go to working directory
