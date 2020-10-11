@@ -8,9 +8,9 @@ fi
 cd src
 
 echo "Generating 3112 reference directions suing Das-Dennis"
-matlab -nodisplay -nodesktop -nosplash -r "save_layer"
+matlab -nodisplay -nodesktop -nosplash -r "gen_das_dennis"
 
 echo "Generating 3112 reference directions suing LHS"
-matlab -nodisplay -nodesktop -nosplash -r "save_lhs"
+matlab -nodisplay -nodesktop -nosplash -r "gen_lhs"
 
 echo "done"
