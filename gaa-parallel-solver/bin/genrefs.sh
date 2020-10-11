@@ -4,7 +4,7 @@ if [ -d "data" ]; then
     rm -rf "data";
     mkdir "data";
 else
-    mdkir "data";
+    mkdir "data";
 fi
 
 cd src
