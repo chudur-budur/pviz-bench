@@ -16,7 +16,7 @@
 
 ## load modules
 module purge
-module load MATLAB/2020b
+module load MATLAB/2020a
 
 ## go to working directory
 cd ${SLURM_SUBMIT_DIR}/src
