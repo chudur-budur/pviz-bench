@@ -1,6 +1,6 @@
 #!/bin/bash
 
-$ROOT=$HOME/data/research/pviz-bench/gaa-parallel-solver
+$ROOT=$HOME/research/pviz-bench/gaa-parallel-solver
 if [ -d "$ROOT/data" ]; then
     rm -rf "$ROOT/data";
     mkdir "$ROOT/data";
