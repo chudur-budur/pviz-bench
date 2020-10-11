@@ -18,5 +18,5 @@ w = genlayer_deb(10, 10, ...
             [1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1],... 
             [1, 2, 3, 3, 5, 3, 3, 2, 2, 2]);
 
-filename = strcat('weights-layer-', num2str(size(w,1)), '.mat');
+filename = strcat('data/refs-das-dennis-', num2str(size(w,1)), '.mat');
 save(filename, 'w');
