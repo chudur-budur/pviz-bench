@@ -1,8 +1,10 @@
 #!/bin/bash
 
 if [ -d "data" ]; then
-    rm -rf data
-    mkdir data
+    rm -rf "data";
+    mkdir "data";
+else
+    mdkir "data";
 fi
 
 cd src
