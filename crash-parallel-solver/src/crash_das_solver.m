@@ -90,6 +90,6 @@ save('../data/crash-das-10d-x.mat', 'X');
 save('../data/crash-das-10d-f.mat', 'F');
 
 dlmwrite('../data/crash-das-10d-x.csv', X, ...
-    'delimiter', ';', 'precision', '%e', 'newline', 'unix');
+    'delimiter', ',', 'precision', '%e', 'newline', 'unix');
 dlmwrite('../data/crash-das-10d-f.csv', F, ...
-    'delimiter', ';', 'precision', '%e', 'newline', 'unix');
+    'delimiter', ',', 'precision', '%e', 'newline', 'unix');

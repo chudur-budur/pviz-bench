@@ -101,10 +101,10 @@ save('../data/gaa-lhs-10d-g.mat', 'G');
 save('../data/gaa-lhs-10d-cv.mat', 'CV');
 
 dlmwrite('../data/gaa-lhs-10d-x.csv', X, ...
-    'delimiter', ';', 'precision', '%e', 'newline', 'unix');
+    'delimiter', ',', 'precision', '%e', 'newline', 'unix');
 dlmwrite('../data/gaa-lhs-10d-f.csv', F, ...
-    'delimiter', ';', 'precision', '%e', 'newline', 'unix');
+    'delimiter', ',', 'precision', '%e', 'newline', 'unix');
 dlmwrite('../data/gaa-lhs-10d-g.csv', G, ...
-    'delimiter', ';', 'precision', '%e', 'newline', 'unix');
+    'delimiter', ',', 'precision', '%e', 'newline', 'unix');
 dlmwrite('../data/gaa-lhs-10d-cv.csv', CV, ...
-    'delimiter', ';', 'precision', '%e', 'newline', 'unix');
+    'delimiter', ',', 'precision', '%e', 'newline', 'unix');

@@ -110,13 +110,13 @@ function [] = gaa_lhs_parallel_solver(N)
     save('../data/gaa-lhs-10d-cv.mat', 'CV');
 
     dlmwrite('../data/gaa-lhs-10d-x.csv', X, ...
-        'delimiter', ';', 'precision', '%e', 'newline', 'unix');
+        'delimiter', ',', 'precision', '%e', 'newline', 'unix');
     dlmwrite('../data/gaa-lhs-10d-f.csv', F, ...
-        'delimiter', ';', 'precision', '%e', 'newline', 'unix');
+        'delimiter', ',', 'precision', '%e', 'newline', 'unix');
     dlmwrite('../data/gaa-lhs-10d-g.csv', G, ...
-        'delimiter', ';', 'precision', '%e', 'newline', 'unix');
+        'delimiter', ',', 'precision', '%e', 'newline', 'unix');
     dlmwrite('../data/gaa-lhs-10d-cv.csv', CV, ...
-        'delimiter', ';', 'precision', '%e', 'newline', 'unix');
+        'delimiter', ',', 'precision', '%e', 'newline', 'unix');
 
     delete(gcp);
     exit
