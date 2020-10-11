@@ -15,7 +15,7 @@ function [] = gaa_lhs_parallel_solver(N)
     pool = parpool(N);
 
     % Load the reference directions
-    load('weights-lhs-3112.mat', 'w');
+    load('../data/refs-lhs-3112.mat', 'w');
     % [number of reference directions, number of objectives]
     [wn, m] = size(w); 
     % number of constraints
