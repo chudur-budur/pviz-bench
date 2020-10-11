@@ -5,5 +5,5 @@ clear;
 
 w = lhsdesign(3112, 10);
 % w = lhsdesign(6049, 10);
-filename = strcat('$HOME/research/pviz-bench/gaa-parallel-solver/data/refs-lhs-', num2str(size(w,1)), '.mat');
+filename = strcat('../data/refs-lhs-', num2str(size(w,1)), '.mat');
 save(filename, 'w');
