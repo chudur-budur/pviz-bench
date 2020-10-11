@@ -94,6 +94,8 @@ function [] = gaa_lhs_parallel_solver(N)
         
         % Now get the original objective values from xval solution.
         f = gaa(xval);
+        fprintf("Solved %d: f = ", i);
+        disp(f);
         % and constraint violation value for the same.
         g = gaa_constfunc(xval);
         [~, cv] = gaa_cv(xval);
