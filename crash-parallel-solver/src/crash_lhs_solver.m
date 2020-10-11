@@ -66,7 +66,7 @@ for i = 1:size(w,1)
 
     % Solve with fmincon 
     [xval, fval, exitflag, output, lambda, grad, hessian] = ...
-            fmincon(crash_func, x(i,:), [], [], [], [], lb, ub, fmcopt);
+            fmincon(crash_func, x(i,:), [], [], [], [], lb, ub, [], fmcopt);
 
     % Solve with patternsearch    
     % [xval, fval, exitflag, output] = ...
