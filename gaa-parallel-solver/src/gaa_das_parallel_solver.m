@@ -19,7 +19,7 @@ function [] = gaa_das_parallel_solver(N)
     % [number of reference directions, number of objectives]
     [wn, m] = size(w); 
     % number of constraints
-    ncv = 18;
+    ng = 18;
 
     rng(123456);
 
@@ -67,7 +67,7 @@ function [] = gaa_das_parallel_solver(N)
     % f = gaa(x(1,:), w(1,:));
     % disp(f)
 
-    G = zeros(wn, 1);
+    G = zeros(wn, ng);
     CV = zeros(wn, 1);
     F = zeros(wn, m);
     X = zeros(wn, n);
@@ -94,14 +94,15 @@ function [] = gaa_das_parallel_solver(N)
         
         % Now get the original objective values from xval solution.
         f = gaa(xval);
+        fprintf("Solved %d: f = ", i);
+        disp(f);
         % and constraint violation value for the same.
-        g = gaa_constfunc(xval);
-        [~, cv] = gaa_cv(xval);
+        [g, cv] = gaa_cv(xval);
         % Save them into the arrays
         X(i,:) = xval;
         F(i,:) = f;
         G(i,:) = g;
-        CV(i,:) = sum(cv);
+        CV(i,:) = cv;
     end
     toc
 

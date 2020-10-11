@@ -6,11 +6,11 @@ format shortg;
 format compact;
 
 % Load the reference directions
-load('weights-layer-3112.mat', 'w');
+load('../data/refs-das-dennis-3112.mat', 'w');
 % [number of reference directions, number of objectives]
 [wn, m] = size(w); 
 % number of constraints
-ncv = 18;
+ng = 18;
 
 rng(123456);
 
@@ -58,9 +58,10 @@ end
 % f = gaa(x(1,:), w(1,:));
 % disp(f)
 
-G = zeros(wn, 1);
+G = zeros(wn, ng);
 CV = zeros(wn, 1);
 F = zeros(wn, m);
+X = zeros(wn, n);
 tic
 for i = 1:size(w,1)
     fprintf("Solving reference direction: %d\n", i);
@@ -85,20 +86,25 @@ for i = 1:size(w,1)
     % Now get the original objective values from xval solution.
     f = gaa(xval);
     % and constraint violation value for the same.
-    g = gaa_constfunc(xval);
-    [~, cv] = gaa_cv(xval);
+    [g, cv] = gaa_cv(xval);
     % Save them into the arrays
+    X(i,:) = xval;
     F(i,:) = f;
     G(i,:) = g;
-    CV(i,:) = sum(cv);
+    CV(i,:) = cv;
 end
 toc
 
-save('gaa-das-10d.mat', 'F');
-save('gaa-das-10d-g.mat', 'G');
-save('gaa-das-10d-cv.mat', 'CV');
+save('../data/gaa-das-10d-x.mat', 'X');
+save('../data/gaa-das-10d-f.mat', 'F');
+save('../data/gaa-das-10d-g.mat', 'G');
+save('../data/gaa-das-10d-cv.mat', 'CV');
 
-dlmwrite('gaa-das-10d.out', F, ...
-    'delimiter', '\t', 'precision', '%e', 'newline', 'unix');
-dlmwrite('gaa-das-10d-cv.out', CV, ...
-    'delimiter', '\t', 'precision', '%e', 'newline', 'unix');
+dlmwrite('../data/gaa-das-10d-x.csv', X, ...
+    'delimiter', ';', 'precision', '%e', 'newline', 'unix');
+dlmwrite('../data/gaa-das-10d-f.csv', F, ...
+    'delimiter', ';', 'precision', '%e', 'newline', 'unix');
+dlmwrite('../data/gaa-das-10d-g.csv', G, ...
+    'delimiter', ';', 'precision', '%e', 'newline', 'unix');
+dlmwrite('../data/gaa-das-10d-cv.csv', CV, ...
+    'delimiter', ';', 'precision', '%e', 'newline', 'unix');
