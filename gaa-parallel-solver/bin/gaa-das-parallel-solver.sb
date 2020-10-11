@@ -18,7 +18,7 @@
 module load MATLAB/2020b
 
 ## go to working directory
-cd ${SLURM_SUBMIT_DIR}
+cd ${SLURM_SUBMIT_DIR}/src
 
 matlab -nodisplay -nodesktop -nosplash -r "gaa_das_parallel_solver 20"
 
