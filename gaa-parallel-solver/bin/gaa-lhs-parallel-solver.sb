@@ -15,11 +15,10 @@
 ##SBATCH --account=gres:MATLAB
 
 ## load modules
-module purge
-module load MATLAB/2018a
+module load MATLAB/2020b
 
 ## go to working directory
-cd ${SLURM_SUBMIT_DIR}
+cd ${SLURM_SUBMIT_DIR}/src
 
 matlab -nodisplay -nodesktop -nosplash -r "gaa_lhs_parallel_solver 20"
 
