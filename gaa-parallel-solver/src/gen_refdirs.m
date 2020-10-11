@@ -5,7 +5,7 @@
 % a = layerwise_Deb(3, 3, [1,0.6,0.2], [1,3,1])
 % a = layerwise_Deb(4, 4, [1,0.75,0.4,0.1], [2,3,2,1]); %my suggestion, change
 
-function Wt = genlayer_deb(objDim, layers, reduc, gap)
+function Wt = gen_refdirs(objDim, layers, reduc, gap)
 
     Wt = [];
     
