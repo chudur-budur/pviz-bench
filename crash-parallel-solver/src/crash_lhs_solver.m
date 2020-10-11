@@ -6,7 +6,7 @@ format shortg;
 format compact;
 
 % Load the reference directions
-load('../data/refs-lhs-3112.mat', 'w');
+load('../data/refs-lhs-1960.mat', 'w');
 % [number of reference directions, number of objectives]
 [wn, m] = size(w); 
 
