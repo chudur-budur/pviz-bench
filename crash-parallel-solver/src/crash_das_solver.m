@@ -22,7 +22,7 @@ fmcopt.Display = 'off' ;
 
 % pattern search option
 psopt = psoptimset(@patternsearch);
-psopt = psoptimset(psopt, 'MaxFunEvals', febound);
+% psopt = psoptimset(psopt, 'MaxFunEvals', febound);
 % psopt = psoptimset(psopt, 'InitialMeshSize', (1.0 / popsize));
 % psopt = psoptimset(psopt, 'InitialMeshSize', 1.0);
 psopt = psoptimset(psopt, 'TolX', 1e-7, 'TolBind', 1e-6);
@@ -62,16 +62,15 @@ tic
 for i = 1:size(w,1)
     fprintf("Solving reference direction: %d\n", i);
     % Anonymize gaa function so that it can take a reference direction.
-    crash_func = @(z)crash(z, w(i, :));
+    crash_func = @(z)crash(z, w(i,:));
 
     % Solve with fmincon 
-    [xval, fval, exitflag, output, lambda, grad, hessian] = ...
-            fmincon(crash_func, x(i,:), [], [], [], [], lb, ub, []);
+    % [xval, fval, exitflag, output, lambda, grad, hessian] = ...
+    %        fmincon(crash_func, x(i,:), [], [], [], [], lb, ub);
 
     % Solve with patternsearch    
-    % [xval, fval, exitflag, output] = ...
-    %        patternsearch(gaa_func, x(i,:), [], [], [], [], lb, ub, ...
-    %                          @gaa_constfunc, psopt) ;
+    [xval, fval, exitflag, output] = ...
+        patternsearch(crash_func, x(i,:), [], [], [], [], lb, ub)
 
     % Weighted sum of objective values
     % fprintf("Optimized weighted f: %.4f\n", fval);
@@ -80,11 +79,6 @@ for i = 1:size(w,1)
     
     % Now get the original objective values from xval solution.
     f = crash(xval);
-    fprintf("f =");
-    disp(f);
-    fprintf("fval =");
-    disp(fval);
-    fprintf("\n");
     % Save them into the arrays
     X(i,:) = xval;
     F(i,:) = f;
