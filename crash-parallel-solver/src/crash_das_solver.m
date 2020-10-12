@@ -13,7 +13,7 @@ load('../data/refs-das-dennis-1960.mat', 'w');
 rng(123456);
 
 % Max function eval.
-febound = 10000;
+febound = 100000;
 
 % fmincon options
 fmcopt = optimoptions('fmincon');
@@ -65,12 +65,14 @@ for i = 1:size(w,1)
     crash_func = @(z)crash(z, w(i,:));
 
     % Solve with fmincon 
-    % [xval, fval, exitflag, output, lambda, grad, hessian] = ...
-    %        fmincon(crash_func, x(i,:), [], [], [], [], lb, ub);
+    [xval, fval, exitflag, output, lambda, grad, hessian] = ...
+            fmincon(crash_func, x(i,:), [], [], [], [], lb, ub, [], fmcopt);
+    fprintf("xval = ");
+    disp(xval);
 
     % Solve with patternsearch    
-    [xval, fval, exitflag, output] = ...
-        patternsearch(crash_func, x(i,:), [], [], [], [], lb, ub, [], psopt)
+    % [xval, fval, exitflag, output] = ...
+    %    patternsearch(crash_func, x(i,:), [], [], [], [], lb, ub, [], psopt)
 
     % Weighted sum of objective values
     % fprintf("Optimized weighted f: %.4f\n", fval);
