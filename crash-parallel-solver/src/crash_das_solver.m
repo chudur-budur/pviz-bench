@@ -70,7 +70,7 @@ for i = 1:size(w,1)
 
     % Solve with patternsearch    
     [xval, fval, exitflag, output] = ...
-        patternsearch(crash_func, x(i,:), [], [], [], [], lb, ub)
+        patternsearch(crash_func, x(i,:), [], [], [], [], lb, ub, [], psopt)
 
     % Weighted sum of objective values
     % fprintf("Optimized weighted f: %.4f\n", fval);
