@@ -12,7 +12,7 @@ if __name__ == "__main__":
     np.random.seed(123456)
 
     # create the reference directions to be used for the optimization
-    refs = get_reference_directions("das-dennis", 10, n_partitions=2)
+    refs = get_reference_directions("das-dennis", 10, n_partitions=5)
     print("ref_dirs.size =", refs.size)
     ref_dirs = simplex(refs.size, 10)
     # sys.exit(0)
@@ -21,7 +21,7 @@ if __name__ == "__main__":
     algorithm = NSGA3(pop_size=ref_dirs.size, ref_dirs=ref_dirs)
 
     # execute the optimization
-    res = minimize(GAA(), algorithm, termination=('n_gen', 100), verbose=True)
+    res = minimize(GAA(), algorithm, termination=('n_gen', 1000), verbose=True)
 
     # save the results
     if res.X is not None:
