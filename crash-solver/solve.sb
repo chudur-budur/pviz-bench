@@ -1,0 +1,56 @@
+#!/bin/bash --login
+########## SBATCH Lines for Resource Request ##########
+ 
+# Limit of wall clock time - how long the job will run (same as -t)
+#SBATCH --time=72:00:00  
+#
+# Number of nodes needed:
+#SBATCH --nodes=1
+#
+# Tasks per node:
+#SBATCH --ntasks-per-node=1
+#
+# Processors per task:
+#SBATCH --cpus-per-task=6
+#
+# Memory per node:
+#SBATCH --mem=100G
+#
+# How many gpus you need:
+#SBATCH --gres=gpu:2
+
+### you can give your job a name for easier identification (same as -J)
+#SBATCH --job-name vae-train
+# stdout
+#SBATCH --output=./run-logs/vae-train-sb.o%j
+# stderr
+#SBATCH --error=./run-logs/vae-train-sb.e%j
+
+### load necessary modules
+module load GCC/6.4.0-2.28
+module load CUDA/9.0.176
+module load SWIG/3.0.12-Python-3.6.4
+module load cuDNN/7.0.2-CUDA-9.0.176
+
+########## Command Lines to Run ##########
+export PYTHONPATH=$PYTHONPATH:"$HOME/.wm364/lib/python3.6/site-packages"
+
+### activate wm364 env
+source $HOME/.wm364/bin/activate
+
+### The path to the executables
+# srcpath="/mnt/home/$USER/research/world-models/tensorflow/carracing"
+# srcpath="$SCRATCH/research/world-models/tensorflow/carracing"
+srcpath="$SCRATCH/research/world-models/tensorflow/robotarm"
+
+### change to the directory where your code is located
+cd $srcpath
+
+### run a single extract instance
+python -u vae_train.py
+
+### write job information to output file
+scontrol show job $SLURM_JOB_ID
+
+### submit this job with
+# sbatch vae-train.sb
