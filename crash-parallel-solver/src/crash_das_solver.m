@@ -66,7 +66,7 @@ for i = 1:size(w,1)
 
     % Solve with fmincon 
     [xval, fval, exitflag, output, lambda, grad, hessian] = ...
-            fmincon(crash_func, x(i,:), [], [], [], [], lb, ub, [], fmcopt);
+            fmincon(crash_func, x(i,:), [], [], [], [], lb, ub, []);
 
     % Solve with patternsearch    
     % [xval, fval, exitflag, output] = ...
@@ -80,6 +80,11 @@ for i = 1:size(w,1)
     
     % Now get the original objective values from xval solution.
     f = crash(xval);
+    fprintf("f =");
+    disp(f);
+    fprintf("fval =");
+    disp(fval);
+    fprintf("\n");
     % Save them into the arrays
     X(i,:) = xval;
     F(i,:) = f;
