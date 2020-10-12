@@ -11,10 +11,10 @@
 #SBATCH --ntasks-per-node=1
 #
 # Processors per task:
-#SBATCH --cpus-per-task=4
+#SBATCH --cpus-per-task=6
 #
 # Memory per node:
-#SBATCH --mem=10G
+#SBATCH --mem=20G
 #
 
 ### you can give your job a name for easier identification (same as -J)
