@@ -22,8 +22,8 @@ fmcopt.Display = 'off' ;
 
 % pattern search option
 psopt = psoptimset(@patternsearch);
-% psopt = psoptimset(psopt, 'MaxFunEvals', febound);
-% psopt = psoptimset(psopt, 'InitialMeshSize', (1.0 / popsize));
+psopt = psoptimset(psopt, 'MaxFunEvals', febound);
+psopt = psoptimset(psopt, 'InitialMeshSize', (1.0 / wn));
 % psopt = psoptimset(psopt, 'InitialMeshSize', 1.0);
 psopt = psoptimset(psopt, 'TolX', 1e-7, 'TolBind', 1e-6);
 psopt = psoptimset(psopt, 'SearchMethod', @MADSPositiveBasis2N);
