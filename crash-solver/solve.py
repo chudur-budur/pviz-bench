@@ -1,4 +1,5 @@
 import numpy as np
+import sys
 
 from pymoo.algorithms.nsga3 import NSGA3
 from pymoo.factory import get_problem, get_reference_directions
@@ -40,8 +41,10 @@ class Crash(Problem):
 
 
 # create the reference directions to be used for the optimization
-ref_dirs = get_reference_directions("das-dennis", 3, n_partitions=50)
+ref_dirs = get_reference_directions("das-dennis", 3, n_partitions=100)
 print(ref_dirs.size)
+sys.exit(0)
+
 
 # create the algorithm object
 algorithm = NSGA3(pop_size=3978, ref_dirs=ref_dirs)
