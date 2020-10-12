@@ -13,7 +13,7 @@ load('../data/refs-das-dennis-1960.mat', 'w');
 rng(123456);
 
 % Max function eval.
-febound = 100000;
+febound = 1000000;
 
 % fmincon options
 fmcopt = optimoptions('fmincon');
