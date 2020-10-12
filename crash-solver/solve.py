@@ -14,7 +14,7 @@ if __name__ == "__main__":
     # sys.exit(0)
 
     # create the algorithm object
-    algorithm = NSGA3(pop_size=15453, ref_dirs=ref_dirs)
+    algorithm = NSGA3(pop_size=ref_dirs.size, ref_dirs=ref_dirs)
 
     # execute the optimization
     res = minimize(Crash(), algorithm, seed=1, termination=('n_gen', 1000), verbose=True)
