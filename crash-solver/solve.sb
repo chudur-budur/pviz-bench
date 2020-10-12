@@ -11,46 +11,42 @@
 #SBATCH --ntasks-per-node=1
 #
 # Processors per task:
-#SBATCH --cpus-per-task=6
+#SBATCH --cpus-per-task=4
 #
 # Memory per node:
-#SBATCH --mem=100G
+#SBATCH --mem=10G
 #
-# How many gpus you need:
-#SBATCH --gres=gpu:2
 
 ### you can give your job a name for easier identification (same as -J)
-#SBATCH --job-name vae-train
+#SBATCH --job-name crash
 # stdout
-#SBATCH --output=./run-logs/vae-train-sb.o%j
+#SBATCH --output=crash-sb.o%j
 # stderr
-#SBATCH --error=./run-logs/vae-train-sb.e%j
+#SBATCH --error=crash-sb.e%j
 
 ### load necessary modules
-module load GCC/6.4.0-2.28
-module load CUDA/9.0.176
-module load SWIG/3.0.12-Python-3.6.4
-module load cuDNN/7.0.2-CUDA-9.0.176
+module load GCCcore/8.3.0
+module load Python/3.8.3
 
 ########## Command Lines to Run ##########
-export PYTHONPATH=$PYTHONPATH:"$HOME/.wm364/lib/python3.6/site-packages"
+export PYTHONPATH=$PYTHONPATH:"$HOME/.local/share/virtualenvs/pviz-bench-0KrWMo75/lib/python3.8/site-packages"
 
-### activate wm364 env
-source $HOME/.wm364/bin/activate
+### activate pipenv
+pipenv shell
 
 ### The path to the executables
 # srcpath="/mnt/home/$USER/research/world-models/tensorflow/carracing"
 # srcpath="$SCRATCH/research/world-models/tensorflow/carracing"
-srcpath="$SCRATCH/research/world-models/tensorflow/robotarm"
+# srcpath="$SCRATCH/research/world-models/tensorflow/robotarm"
 
 ### change to the directory where your code is located
-cd $srcpath
+cd ${SLURM_SUBMIT_DIR}
 
 ### run a single extract instance
-python -u vae_train.py
+python3 -u solve.py
 
 ### write job information to output file
 scontrol show job $SLURM_JOB_ID
 
 ### submit this job with
-# sbatch vae-train.sb
+# sbatch solve.sb
