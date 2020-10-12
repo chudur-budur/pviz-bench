@@ -14,7 +14,7 @@ class GAA(Problem):
                 25, 110, 20, 3.75, 1, 0.48, 11, 6, 5.968, 25, 110, 20, 3.75, 1])
 
     def _evaluate(self, x, out, *args, **kwargs):
-        n1 = x.size // self.n_var
+        n1 = x.shape[0]
         WEMP2_GOAL = 1900
         DOC2_GOAL = 60
         WFUEL2_GOAL = 450

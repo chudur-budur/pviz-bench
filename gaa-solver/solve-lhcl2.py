@@ -12,9 +12,12 @@ if __name__ == "__main__":
     np.random.seed(123456)
 
     # create the reference directions to be used for the optimization
-    refs = get_reference_directions("das-dennis", 10, n_partitions=5)
-    print("ref_dirs.size =", refs.size)
-    ref_dirs = simplex(refs.size, 10)
+    refs = get_reference_directions("das-dennis", 10, n_partitions=2)
+    print(refs[0:3])
+    print("refs.shape =", refs.shape)
+    ref_dirs = simplex(refs.shape[0], 10)
+    print(ref_dirs[0:3])
+    print("ref_dirs.size =", ref_dirs.shape)
     # sys.exit(0)
 
     # create the algorithm object

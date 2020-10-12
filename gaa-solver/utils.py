@@ -1,4 +1,6 @@
 import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 
 def lhc(n=10, m=2):
     r""" Latin Hyper-cube Sampling (LHS) of `n` points in `m` dimension.
@@ -65,3 +67,12 @@ def simplex(n=10, m=2, mode='lhcl2', delta=0.001):
     F_ = np.linalg.norm(F, 2, axis=1)
     F = (F.T / F_).T 
     return F
+
+if __name__ == "__main__":
+    F = simplex(100, 3)
+    print(F.shape)
+
+    fig = plt.figure()
+    ax = Axes3D(fig)
+    ax.scatter(F[:,0], F[:,1], F[:,2])
+    plt.show()
