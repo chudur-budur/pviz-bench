@@ -24,7 +24,7 @@ if __name__ == "__main__":
     algorithm = NSGA3(pop_size=ref_dirs.shape[0], ref_dirs=ref_dirs)
 
     # execute the optimization
-    res = minimize(GAA(), algorithm, termination=('n_gen', 1000), verbose=True)
+    res = minimize(GAA(), algorithm, termination=('n_gen', 5000), verbose=True)
 
     # save the results
     if res.X is not None:
