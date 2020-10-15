@@ -24,7 +24,10 @@ pfs = {'dtlz2': ['3d', '4d', '8d'], \
        'cdebmdk-nbi': ['3d', '4d', '8d'], \
        'c0dtlz2': ['3d', '4d', '8d'], \
        'c0dtlz2-nbi': ['3d', '4d', '8d'], \
-       'crash-nbi': ['3d'], 'crash-c1-nbi': ['3d'], 'crash-c2-nbi': ['3d'], \
+       'crash-nbi': ['3d'], \
+       'crash-c1-nbi': ['3d'], \
+       'crash-c2-nbi': ['3d'], \
+       'carside-nbi': ['3d'], \
        'gaa': ['10d'], \
        'gaa-nbi': ['10d']}
 
@@ -49,11 +52,3 @@ for pf in list(pfs.keys())[-2:]:
                 L = simple_shape.depth_contours(F)
             # save the layers
             io.savetxt(os.path.join(path, "depth-cont-cvhull.csv"), L, fmt='{:d}', delimiter=',')
-            
-            # We are not using this since it's exrtemely slow and also doesn't give
-            # layers if all the points are on a fully convex surface.
-            # print("Generating depth-contours (project_collapse=False) for " + frontname)
-            # # test ss.depth_contour function without projection and collapse
-            # L = ss.depth_contours(F, project_collapse = False)
-            # save the layers
-            # io.savetxt(os.path.join(path, "depth-cont-cvhull.csv"), L, fmt = '{:d}', delimiter = ',')

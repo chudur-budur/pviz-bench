@@ -1,0 +1,52 @@
+#!/bin/bash --login
+########## SBATCH Lines for Resource Request ##########
+ 
+# Limit of wall clock time - how long the job will run (same as -t)
+#SBATCH --time=72:00:00  
+#
+# Number of nodes needed:
+#SBATCH --nodes=1
+#
+# Tasks per node:
+#SBATCH --ntasks-per-node=1
+#
+# Processors per task:
+#SBATCH --cpus-per-task=6
+#
+# Memory per node:
+#SBATCH --mem=30G
+#
+
+### you can give your job a name for easier identification (same as -J)
+#SBATCH --job-name cvhull-depth
+# stdout
+#SBATCH --output=cvhull-depth-sb.o%j
+# stderr
+#SBATCH --error=cvhull-depth-sb.e%j
+
+### load necessary modules
+module load GCCcore/8.3.0
+module load Python/3.8.3
+
+########## Command Lines to Run ##########
+export PYTHONPATH=$PYTHONPATH:"$HOME/.local/share/virtualenvs/pviz-bench-0KrWMo75/lib/python3.8/site-packages"
+
+### activate pipenv
+pipenv shell
+
+### The path to the executables
+# srcpath="/mnt/home/$USER/research/world-models/tensorflow/carracing"
+# srcpath="$SCRATCH/research/world-models/tensorflow/carracing"
+# srcpath="$SCRATCH/research/world-models/tensorflow/robotarm"
+
+### change to the directory where your code is located
+cd ${SLURM_SUBMIT_DIR}
+
+### run a single extract instance
+python3 -u generators-cvhull-depths.py
+
+### write job information to output file
+scontrol show job $SLURM_JOB_ID
+
+### submit this job with
+# sbatch solve.sb
