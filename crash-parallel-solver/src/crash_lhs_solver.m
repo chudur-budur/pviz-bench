@@ -55,6 +55,7 @@ end
 % evalue the initial population and estimate bounds
 F_ = crash(X_);
 ideal = min(F_);
+ideal = ideal - (ideal .* 0.5);
 nadir = max(F_);
 
 F = zeros(wn, m);
@@ -67,7 +68,7 @@ for i = 1:size(W,1)
     
     fprintf("Solving reference direction: %d\n", i);
     % Anonymize gaa function so that it can take a reference direction.
-    crash_func = @(z)crash_asf(z, W(i,:), ideal, nadir);
+    crash_func = @(z)crash_scalarized(z, W(i,:), ideal, nadir);
 
     % Solve with fmincon 
     % [x, f, exitflag, output, lambda, grad, hessian] = ...
@@ -75,13 +76,13 @@ for i = 1:size(W,1)
     %    LB, UB, [], fmcopt);
 
     % Solve with patternsearch    
-    %[x, f, exitflag, output] = ...
-    %       patternsearch(crash_func, X_(j,:), [], [], [], [], ...
-    %       LB, UB, [], psopt);
-       
     [x, f, exitflag, output] = ...
-           ga(crash_func, n, [], [], [], [], LB, UB, [], ...
-           gaopt);
+           patternsearch(crash_func, X_(j,:), [], [], [], [], ...
+           LB, UB, [], psopt);
+       
+    % [x, f, exitflag, output] = ...
+    %       ga(crash_func, n, [], [], [], [], LB, UB, [], ...
+    %       gaopt);
 
     % Weighted sum of objective values
     % fprintf("Optimized weighted f: %.4f\n", fval);
