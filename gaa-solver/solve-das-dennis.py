@@ -9,7 +9,7 @@ from GAA import GAA
 
 if __name__ == "__main__":
     # create the reference directions to be used for the optimization
-    ref_dirs = get_reference_directions("das-dennis", 10, n_partitions=7)
+    ref_dirs = get_reference_directions("das-dennis", 10, n_partitions=8)
     print("ref_dirs.shape =", ref_dirs.shape)
     # sys.exit(0)
 
