@@ -38,7 +38,7 @@ pfs = {'dtlz2': ['3d', '4d', '8d'], \
 
 for pf in list(pfs.keys())[-2:]:
     for dim in pfs[pf]:
-        fullpathf = "../data/{0:s}/{1:s}/dataf.csv".format(pf, dim)
+        fullpathf = "../data/{0:s}/{1:s}/f.csv".format(pf, dim)
         if os.path.exists(fullpathf):
             path, filenamef = os.path.split(fullpathf)
             dirs = path.split('/')
