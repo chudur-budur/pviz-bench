@@ -1,14 +1,19 @@
 """generators-cvhull-depths.py -- a python script from generators-cvhull-depths.ipynb to be run on hpcc.
 
     Just a copy of `generators-cvhull-depths.ipynb` as a python script.
+    You need to use the slurm submission script to run this code on hpcc.
+    The submission script is `run-generators-cvhull-depth-on-hpc.sb`. Please
+    change the hw resource parameters in the files according to your need.
+
+    We are doing it because in some datasets, it takes a very long time to 
+    compute the depth contours.
 """
 
 import sys
 import os
 import numpy as np
-sys.path.append('../')
-from vis.tda import simple_shape
-from vis.utils import io
+from viz.tda import simple_shape
+from viz.utils import io
 
 pfs = {'dtlz2': ['3d', '4d', '8d'], \
        'dtlz2-nbi': ['3d', '4d', '8d'], \
