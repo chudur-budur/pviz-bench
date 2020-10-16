@@ -6,14 +6,14 @@ format shortg;
 format compact;
 
 % Load the reference directions
-W = csvread('../data/refs-das-dennis.csv');
+W = csvread('../data/refs-lhc.csv');
 % [number of reference directions, number of objectives]
 [wn, m] = size(W); 
 
 rng(123456);
 
 % Max function eval.
-febound = 10000;
+febound = 100000;
 
 % fmincon options
 fmcopt = optimoptions('fmincon');
@@ -83,11 +83,6 @@ for i = 1:size(W,1)
     % [x, f, exitflag, output] = ...
     %       ga(crash_func, n, [], [], [], [], LB, UB, [], ...
     %       gaopt);
-
-    % Weighted sum of objective values
-    % fprintf("Optimized weighted f: %.4f\n", fval);
-    % Actual objective values from the final solution xval.
-    % fprintf("Final f:\n")
     
     % Now get the original objective values from xval solution.
     f_ = crash(x);
@@ -97,10 +92,10 @@ for i = 1:size(W,1)
 end
 toc
 
-save('../data/crash-lhs-10d-x.mat', 'X');
-save('../data/crash-lhs-10d-f.mat', 'F');
+save('../data/lhc-x.mat', 'X');
+save('../data/lhc-f.mat', 'F');
 
-dlmwrite('../data/crash-lhs-10d-x.csv', X, ...
+dlmwrite('../data/lhc-x.csv', X, ...
     'delimiter', ',', 'precision', '%e', 'newline', 'unix');
-dlmwrite('../data/crash-lhs-10d-f.csv', F, ...
+dlmwrite('../data/lhc-f.csv', F, ...
     'delimiter', ',', 'precision', '%e', 'newline', 'unix');
