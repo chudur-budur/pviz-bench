@@ -1,12 +1,14 @@
 refs_file = '../data/refs-lhcl2.csv';
 
-[X, F, G, W] = gaa_parallel_solver(refs_file, 20, 'ga');
+[X, F, G, W] = gaa_parallel_solver(refs_file, 2, 'ga');
 
 [path,name,~] = fileparts(refs_file);
 prefix = split(name, '-');
 prefix(1) = [];
 if size(prefix,1) > 1
     prefix = strjoin(prefix, '-');
+else
+    prefix = prefix{1};
 end
 x_mat = fullfile(path, strcat(prefix, '-x.mat'));
 x_csv = fullfile(path, strcat(prefix, '-x.csv'));
