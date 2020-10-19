@@ -1,4 +1,4 @@
-function [X, F, G, W] = gaa_parallel_solver(refs_file, N, mode)
+function [X, F, G, W] = gaa_parallel_solver(refs_file, N, solver)
 %%GAA_PARALLEL_SOLVER This function solves the gaa problem on 
 % each of the reference directions found from LHS. The directionsa 
 % are read from refs_file file. The number of parallel pool is 
@@ -57,7 +57,7 @@ function [X, F, G, W] = gaa_parallel_solver(refs_file, N, mode)
     end
 
     % evalue the initial population and estimate bounds
-    F_ = gaa(X_);
+    [~,F_,~,~] = gaa(X_);
     ideal = min(F_);
     ideal = ideal - (ideal .* 0.5);
     % sideal = zeros(1, size(F_,2)); 
@@ -94,18 +94,18 @@ function [X, F, G, W] = gaa_parallel_solver(refs_file, N, mode)
             fprintf("Solving reference direction: %d\n", i);
             % Anonymize gaa function so that it can take a reference 
             % direction.
-            if strcmp(mode, 'ga')
+            if strcmp(solver, 'ga')
                 gaa_func = @(z)gaa_scalarized(z, W(i,:), ideal, nadir);
             else
                 gaa_func = @(z)gaa_scalarized(z, Wc(i,:), ideal, nadir);
             end
             
-            if strcmp(mode, 'fmincon')
+            if strcmp(solver, 'fmincon')
                 % Solve with fmincon
                 [x, ~, ~, ~, ~, ~, ~] = ...
                     fmincon(gaa_func, X_(i,:), [], [], [], [], ...
                     LB, UB, @gaa_cf, fmcopt);
-            elseif strcmp(mode, 'patternsearch')
+            elseif strcmp(solver, 'patternsearch')
                 % Solve with patternsearch
                 [x, ~, ~, ~] = ...
                     patternsearch(gaa_func, X_(i,:), [], [], [], [], ...
@@ -132,18 +132,18 @@ function [X, F, G, W] = gaa_parallel_solver(refs_file, N, mode)
             fprintf("Solving reference direction: %d\n", i);
             % Anonymize gaa function so that it can take a 
             % reference direction.
-            if strcmp(mode, 'ga')
+            if strcmp(solver, 'ga')
                 gaa_func = @(z)gaa_scalarized(z, W(i,:), ideal, nadir);
             else
                 gaa_func = @(z)gaa_scalarized(z, Wc(i,:), ideal, nadir);
             end
 
-            if strcmp(mode, 'fmincon')
+            if strcmp(solver, 'fmincon')
                 % Solve with fmincon
                 [x, ~, ~, ~, ~, ~, ~] = ...
                     fmincon(gaa_func, X_(i,:), [], [], [], [], ...
                     LB, UB, @gaa_cf, fmcopt);
-            elseif strcmp(mode, 'patternsearch')
+            elseif strcmp(solver, 'patternsearch')
                 % Solve with patternsearch
                 [x, ~, ~, ~] = ...
                     patternsearch(gaa_func, X_(i,:), [], [], [], [], ...
