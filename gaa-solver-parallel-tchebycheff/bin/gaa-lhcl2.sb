@@ -5,7 +5,7 @@
 #SBATCH --mem=16gb
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=20
-#SBATCH --job-name mlb-lhcl2-ps
+#SBATCH --job-name gaa-lhcl2-mlb
 #SBATCH --output=gaa-lhcl2.o%j
 #SBATCH --error=gaa-lhcl2.e%j
 ## NOTE: If you get a message saying you exceeded the memory limit, add more memory!
