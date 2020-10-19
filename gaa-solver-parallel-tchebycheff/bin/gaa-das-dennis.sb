@@ -1,12 +1,13 @@
 #!/bin/bash -login
 
 ## request resources
-#SBATCH --time=03:00:00
-#SBATCH --mem=4gb
+#SBATCH --time=138:00:00
+#SBATCH --mem=16gb
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=20
-#SBATCH --output=gaa-das-parallel-solver.sb.o%j
-#SBATCH --error=gaa-das-parallel-solver.sb.e%j
+#SBATCH --job-name mlb-gaa-ps
+#SBATCH --output=gaa-das-dennis.o%j
+#SBATCH --error=gaa-das-dennis.e%j
 ## NOTE: If you get a message saying you exceeded the memory limit, add more memory!
 ## NOTE: in sbatch script, only one node one ppn is requestes. cores to run
 ## Workers are requested by MATLAB MDCE as a seperate job.
@@ -16,11 +17,11 @@
 
 ## load modules
 module purge
-module load MATLAB/2020a
+module load MATLAB
 
 ## go to working directory
 cd ${SLURM_SUBMIT_DIR}/src
 
-matlab -nodisplay -nodesktop -nosplash -r "gaa_das_parallel_solver 20"
+matlab -nodisplay -nodesktop -nosplash -r "solver-das-dennis"
 
 scontrol show job ${SLURM_JOBID}
