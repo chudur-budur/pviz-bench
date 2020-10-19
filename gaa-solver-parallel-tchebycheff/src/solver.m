@@ -1,6 +1,6 @@
 refs_file = '../data/refs-das-dennis.csv';
 
-%[X, F, G, W] = gaa_parallel_solver(refs_file, 3, 'ga');
+[X, F, G, W] = gaa_parallel_solver(refs_file, 3, 'ga');
 
 [path,name,~] = fileparts(refs_file);
 prefix = split(name, '-');
