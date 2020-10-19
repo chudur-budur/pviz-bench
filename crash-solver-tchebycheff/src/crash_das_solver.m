@@ -96,6 +96,11 @@ for i = 1:size(w,1)
 end
 toc
 
+% Now get the first front
+idx = paretofront(F);
+F = F(idx,:);
+X = X(idx,:);
+
 save('../data/das-x.mat', 'X');
 save('../data/das-f.mat', 'F');
 
@@ -103,3 +108,7 @@ dlmwrite('../data/das-x.csv', X, ...
     'delimiter', ',', 'precision', '%e', 'newline', 'unix');
 dlmwrite('../data/das-f.csv', F, ...
     'delimiter', ',', 'precision', '%e', 'newline', 'unix');
+
+% plot
+figure;
+scatter3(F(:,1), F(:,2), F(:,3));
