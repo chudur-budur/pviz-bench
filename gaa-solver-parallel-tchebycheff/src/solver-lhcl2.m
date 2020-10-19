@@ -1,6 +1,6 @@
 refs_file = '../data/refs-lhcl2.csv';
 
-[X, F, G, W] = gaa_parallel_solver(refs_file, 3, 'ga');
+[X, F, G, W] = gaa_parallel_solver(refs_file, 20, 'ga');
 
 [path,name,~] = fileparts(refs_file);
 prefix = split(name, '-');
@@ -27,5 +27,5 @@ dlmwrite(g_csv, G, 'delimiter', ',', 'precision', '%e', ...
     'newline', 'unix');
 
 % plot
-figure;
-scatter3(F(:,1), F(:,2), F(:,3));
+% figure;
+% scatter3(F(:,1), F(:,2), F(:,3));
