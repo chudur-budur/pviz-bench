@@ -1,4 +1,4 @@
-function [X, F, W] = crash_parallel_solver(refs_file, N, mode)
+function [F, X, W] = crash_parallel_solver(refs_file, N, mode)
 %%CRASH_SOLVER This function solves the gaa problem on each of the 
 % reference directions found from LHS. The directionsa are read from 
 % refs_file file. The number of parallel pool is given in N.
@@ -53,8 +53,7 @@ function [X, F, W] = crash_parallel_solver(refs_file, N, mode)
     % evalue the initial population and estimate bounds
     F_ = crash(X_);
     ideal = min(F_);
-    ideal = ideal - (ideal .* 0.5);
-    % sideal = zeros(1, size(F_,2)); 
+    ideal = zeros(size(F_); % ideal - (ideal .* 0.5);
     nadir = max(F_);
     
     % find an initial solution that is closest to W(i,:)
@@ -62,7 +61,7 @@ function [X, F, W] = crash_parallel_solver(refs_file, N, mode)
     Wc = zeros(wn, m);
     for i = 1:size(Wc,1)
         [~,j] = min(vecnorm(F_ - W(i,:), 2, 2));
-         Wc(i,:) = W(j,:);
+         Wc(i) = W(j);
     end
 
     % wn = 500;
@@ -87,12 +86,8 @@ function [X, F, W] = crash_parallel_solver(refs_file, N, mode)
             fprintf("Solving reference direction: %d\n", i);
             % Anonymize gaa function so that it can take a reference 
             % direction.
-            if strcmp(mode, 'ga')
-                crash_func = @(z)crash_scalarized(z, W(i,:), ideal, nadir);
-            else
-                crash_func = @(z)crash_scalarized(z, Wc(i,:), ideal, nadir);
-            end
-            
+            crash_func = @(z)crash_scalarized(z, Wc(i), ideal, nadir);
+
             if strcmp(mode, 'fmincon')
                 % Solve with fmincon
                 [x, ~, ~, ~, ~, ~, ~] = ...
@@ -103,8 +98,7 @@ function [X, F, W] = crash_parallel_solver(refs_file, N, mode)
                 [x, ~, ~, ~] = ...
                     patternsearch(crash_func, X_(i,:), [], [], [], [], ...
                         LB, UB, [], psopt);
-            else
-                % Solve with ga
+            elseif strcmp(mode, 'ga')
                 [x, ~, ~, ~] = ...
                     ga(crash_func, n, [], [], [], [], LB, UB, [], gaopt);
             end
@@ -123,11 +117,7 @@ function [X, F, W] = crash_parallel_solver(refs_file, N, mode)
             fprintf("Solving reference direction: %d\n", i);
             % Anonymize gaa function so that it can take a 
             % reference direction.
-            if strcmp(mode, 'ga')
-                crash_func = @(z)crash_scalarized(z, W(i,:), ideal, nadir);
-            else
-                crash_func = @(z)crash_scalarized(z, Wc(i,:), ideal, nadir);
-            end
+            crash_func = @(z)crash_scalarized(z, Wc(i), ideal, nadir);
 
             if strcmp(mode, 'fmincon')
                 % Solve with fmincon
@@ -138,9 +128,8 @@ function [X, F, W] = crash_parallel_solver(refs_file, N, mode)
                 % Solve with patternsearch
                 [x, ~, ~, ~] = ...
                     patternsearch(crash_func, X_(i,:), [], [], [], [], ...
-                    LB, UB, [], psopt);
-            else
-                % Solve with ga
+                        LB, UB, [], psopt);
+            elseif strcmp(mode, 'ga')
                 [x, ~, ~, ~] = ...
                     ga(crash_func, n, [], [], [], [], LB, UB, [], gaopt);
             end
@@ -155,7 +144,7 @@ function [X, F, W] = crash_parallel_solver(refs_file, N, mode)
     end
 
     % Now get the first front
-    idx = paretofront(F);
-    F = F(idx,:);
-    X = X(idx,:);
+%     idx = paretofront(F);
+%     F = F(idx,:);
+%     X = X(idx,:);
 end

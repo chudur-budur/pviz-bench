@@ -1,4 +1,4 @@
-function [x, f, g, cv] = gaa_true(x, objnum)
+function [x, f, g, cv] = gaa(x)
     %% Evaluate GAA problem, along with all the individual
     
     %% constraint functions and CV.
@@ -835,7 +835,7 @@ function [x, f, g, cv] = gaa_true(x, objnum)
     obj(:,7) = -(min_RANGE);
     obj(:,8) = -(min_LDMAX);
     obj(:,9) = -(min_VCMAX);
-    obj(:,objnum) = (PFPF);
+    obj(:,10) = (PFPF);
 
     %% Constraints -- Similar to Laura's Study
     NOISE2_CV = (NOISE2 - 75) ./ 75;

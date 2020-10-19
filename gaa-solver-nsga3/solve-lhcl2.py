@@ -18,7 +18,7 @@ if __name__ == "__main__":
     ref_dirs = simplex(refs.shape[0], 10)
     print(ref_dirs[0:3])
     print("ref_dirs.shape =", ref_dirs.shape)
-    sys.exit(0)
+    # sys.exit(0)
 
     # create the algorithm object
     algorithm = NSGA3(pop_size=ref_dirs.shape[0], ref_dirs=ref_dirs)
