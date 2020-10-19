@@ -1,6 +1,6 @@
 refs_file = '../data/refs-lhcl2.csv';
 
-[X, F, G, W] = gaa_parallel_solver(refs_file, 2, 'ga');
+[X, F, G, W] = gaa_parallel_solver(refs_file, 20, 'ga');
 
 [path,name,~] = fileparts(refs_file);
 prefix = split(name, '-');
