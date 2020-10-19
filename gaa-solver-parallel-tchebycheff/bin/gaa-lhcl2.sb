@@ -22,6 +22,6 @@ module load MATLAB
 ## go to working directory
 cd ${SLURM_SUBMIT_DIR}/src
 
-matlab -nodisplay -nodesktop -nosplash -r "solver-lhcl2"
+matlab -nodisplay -nodesktop -nosplash -r "solver_lhcl2"
 
 scontrol show job ${SLURM_JOBID}
