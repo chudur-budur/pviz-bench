@@ -6,7 +6,9 @@ refs_file = '../data/refs-das-dennis.csv';
 prefix = split(name, '-');
 prefix(1) = [];
 if size(prefix,1) > 1
-    prefix = strjoin(p, '-');
+    prefix = strjoin(prefix, '-');
+else
+    prefix = prefix{1};
 end
 x_mat = fullfile(path, strcat(prefix, '-x.mat'));
 x_csv = fullfile(path, strcat(prefix, '-x.csv'));
