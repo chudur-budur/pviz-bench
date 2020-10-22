@@ -29,12 +29,10 @@ pfs = {'dtlz2': ['3d', '4d', '8d'], \
        'cdebmdk-nbi': ['3d', '4d', '8d'], \
        'c0dtlz2': ['3d', '4d', '8d'], \
        'c0dtlz2-nbi': ['3d', '4d', '8d'], \
-       'crash-nbi': ['3d'], \
-       'crash-c1-nbi': ['3d'], \
-       'crash-c2-nbi': ['3d'], \
        'carside-nbi': ['3d'], \
-       'gaa': ['10d'], \
-       'gaa-nbi': ['10d']}
+       'crash-nbi': ['3d'], 'crash-c1-nbi': ['3d'], 'crash-c2-nbi': ['3d'], \
+       'gaa-fmincon': ['10d'], 'gaa-fmincon-nbi': ['10d'], \
+       'gaa-nsga3': ['10d'], 'gaa-nsga3-nbi': ['10d']}
 
 for pf in list(pfs.keys())[-2:]:
     for dim in pfs[pf]:
@@ -51,7 +49,7 @@ for pf in list(pfs.keys())[-2:]:
             # it looks like these PFs are better displayed if project_collapse=False
             if pf in ['dtlz8', 'dtlz8-nbi', 'crash-nbi', 'crash-c1-nbi', 'crash-c2-nbi']:
                 L = simple_shape.depth_contours(F, project_collapse=False)
-            elif pf in ['gaa', 'gaa-nbi']:
+            elif pf in ['gaa-fmincon', 'gaa-fmincon-nbi', 'gaa-nsga3', 'gaa-nsga3-nbi']:
                 L = simple_shape.depth_contours(F, verbose=True)
             else:
                 L = simple_shape.depth_contours(F)
