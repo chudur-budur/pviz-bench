@@ -114,10 +114,10 @@ if __name__ == "__main__":
     f4 = (alpha**-1) * norm.pdf(norm.ppf(alpha)) * np.sqrt(f2) - f1
     print(f4)
 
-    R = Qr['aapl']
-    fig = plt.figure()
-    ax = fig.gca()
-    ax.hist(R[R.columns[-1]], bins=40)
-    ax.axvline(f3, color='r', linestyle='dashed', linewidth=1)
-    ax.axvline(f4, color='g', linestyle='dashed', linewidth=1)
-    plt.show()
+    # R = Qr['aapl']
+    # fig = plt.figure()
+    # ax = fig.gca()
+    # ax.hist(R[R.columns[-1]], bins=40)
+    # ax.axvline(f3, color='r', linestyle='dashed', linewidth=1)
+    # ax.axvline(f4, color='g', linestyle='dashed', linewidth=1)
+    # plt.show()
