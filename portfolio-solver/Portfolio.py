@@ -68,26 +68,29 @@ class Portfolio(Problem):
     def _evaluate(self, X, out, *args, **kwargs):
         
         # get return
-        f1 = np.sum(self.rmean * X, axis=1)
+        return_ = np.sum(self.rmean * X, axis=1)
 
         # get risk
-        f2 = np.zeros(X.shape[0])
+        risk = np.zeros(X.shape[0])
         for k in range(X.shape[0]):
-            f2[k] = np.dot(X[k], np.dot(X[k].T, self.rcov))
+            risk[k] = np.dot(X[k], np.dot(X[k].T, self.rcov))
             
         # get value at risk (VaR)
-        f3 = 1 - norm.ppf(self.alpha, 1 + f1, np.sqrt(f2))
+        var = 1 - norm.ppf(self.alpha, 1 + return_, np.sqrt(risk))
         
         # get conditional value at risk (CVaR)
-        f4 = (self.alpha**-1) * norm.pdf(norm.ppf(self.alpha)) * np.sqrt(f2) - f1
+        cvar = (self.alpha**-1) * norm.pdf(norm.ppf(self.alpha)) * np.sqrt(risk) - return_
           
         # obj. 5
-        # f5 = np.sum(X < 0.08, axis=1)
+        min_th = np.sum(X < 0.08, axis=1)
+
+        # obj 6
+        # max_th = np.sum(X > 0.9, axis=1)
                     
         # budget constraint
         g1 = np.sum(X, axis=1) - 1
 
-        out["F"] = anp.column_stack([-f1, f2, f3, f4])
+        out["F"] = anp.column_stack([-return_, var, cvar, min_th])
         out["G"] = g1 # anp.column_stack([g1, g2])
 
 if __name__ == "__main__":

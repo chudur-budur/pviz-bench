@@ -19,9 +19,9 @@ if __name__ == "__main__":
     print("rcov:", rcov)
 
     # create the reference directions to be used for the optimization
-    ref_dirs = get_reference_directions("das-dennis", 4, n_partitions=35)
+    ref_dirs = get_reference_directions("das-dennis", 4, n_partitions=40)
     print("ref_dirs:", ref_dirs.shape)
-    # sys.exit(0)
+    sys.exit(0)
 
     # create the algorithm object
     algorithm = NSGA3(pop_size=ref_dirs.shape[0], ref_dirs=ref_dirs)
