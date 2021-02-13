@@ -85,12 +85,12 @@ class Portfolio(Problem):
         min_th = np.sum(X < 0.08, axis=1)
 
         # obj 6
-        # max_th = np.sum(X > 0.9, axis=1)
+        max_th = np.sum(X > 0.9, axis=1)
                     
         # budget constraint
         g1 = np.sum(X, axis=1) - 1
 
-        out["F"] = anp.column_stack([-return_, var, cvar, min_th])
+        out["F"] = anp.column_stack([-return_, var, max_th, min_th])
         out["G"] = g1 # anp.column_stack([g1, g2])
 
 if __name__ == "__main__":
