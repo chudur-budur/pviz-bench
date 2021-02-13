@@ -2,7 +2,7 @@ import numpy as np
 import sys
 
 from pymoo.algorithms.nsga3 import NSGA3
-from pymoo.factory import get_problem, get_reference_directions
+from pymoo.factory import get_reference_directions
 from pymoo.optimize import minimize
 
 from utils import simplex
@@ -10,6 +10,7 @@ from GAA import GAA
 
 
 if __name__ == "__main__":
+    np.random.seed(123456)
     # create the reference directions to be used for the optimization
     refs = get_reference_directions("das-dennis", 10, n_partitions=7)
     print(refs[0:3])
